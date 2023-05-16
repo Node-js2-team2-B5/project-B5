@@ -13,7 +13,7 @@ def home():
 def guestbook():
     return render_template('guestbook.html')
 
-@app.route("/members", methods=["POST"])
+@app.route("/members", methods=["POST"]) #members를 저장하는 DB
 def member_post():
     name_receive = request.form['name_give']
     mbti_receive = request.form['mbti_give']
@@ -29,7 +29,7 @@ def member_post():
     db.member.insert_one(doc)
     return jsonify({'msg':'등록 완료!'})
 
-@app.route("/guestbook", methods=["POST"])
+@app.route("/guestbook", methods=["POST"])  #gusetbook을 저장하는 DB
 def guestbook_post():
     name_receive = request.form['name_give']
     comment_receive = request.form['comment_give']
