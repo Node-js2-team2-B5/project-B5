@@ -9,9 +9,9 @@ db = client.dbsparta
 def home():
     return render_template('index.html')
 
-@app.route('/kang')
-def kang():
-    return render_template('kang.html')
+@app.route('/members/<membername>')
+def get_membername(membername):
+    return render_template(f'/members/{membername}.html')
 
 @app.route('/guestbook')
 def guestbook():
@@ -31,7 +31,7 @@ def member_post():
         'style' : style_receive
     }
     db.member.insert_one(doc)
-    return jsonify({'msg':'등록 완료!'})
+    return jsonify({'msg': '저장 완료!'})
 
 @app.route("/guestbook", methods=["POST"])
 def guestbook_post():

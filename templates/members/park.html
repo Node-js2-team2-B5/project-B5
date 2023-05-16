@@ -36,21 +36,20 @@
     <script>
         // $(document).ready(function () {
         //   show_profile();
+        //   show_comment();
         // });
       
-        function save_profile() {
+        function save_comment() {
           let name = $("#inputName").val();
-          let mbti = $("#inputMbti").val();
-          let advantage = $("#inputAdvantage").val();
-          let style = $("#inputStyle").val();
+          let comment = $("#inputComment").val();
+          
   
           let formData = new FormData();
           formData.append("name_give", name);
-          formData.append("mbti_give", mbti);
-          formData.append("advantage_give", advantage);
-          formData.append("style_give", style);
+          formData.append("comment_give", comment);
+        
   
-          fetch("/members", { method: "POST", body: formData })
+          fetch("/guestbook", { method: "POST", body: formData })
           .then((res) => res.json())
           .then((data) => {
             alert(data["msg"]);
@@ -93,6 +92,7 @@
                 <li><a href="/members/kwak">곽현규</a></li>
                 <li><a href="/members/shim">심재두</a></li>
             </ul>
+        </ul>
         </div>
     </header>
     <main>
@@ -102,60 +102,40 @@
             </div>
             <ul>
                 <li>
-                    <h4>5조 팀소개</h4>
-                    <p>
-                        시들어 힘차게 못하다 것이다.보라, 사랑의 있는가? 설레는 무엇이 없으면 동력은 사막이다. 가슴이 속에 커다란 투명하되 청춘의 것이다. 무한한 얼음에 되려니와, 사는가 청춘이 인간이 목숨을 대고, 작고 것이다. 이상이 있는 피부가 거친 살 듣는다.
-                    </p>
+                    <h4>이름</h4>
+                    <p>박성민</p>
                 </li>
                 <li>
-                    <h4>5조 팀특징</h4>
-                    <p>
-                        시들어 힘차게 못하다 것이다.보라, 사랑의 있는가? 설레는 무엇이 없으면 동력은 사막이다. 가슴이 속에 커다란 투명하되 청춘의 것이다. 무한한 얼음에 되려니와, 사는가 청춘이 인간이 목숨을 대고, 작고 것이다. 이상이 있는 피부가 거친 살 듣는다.
-                    </p>
+                    <h4>MBTI</h4>
+                    <p>INFP</p>
                 </li>
                 <li>
-                    <h4>궁극적 목표</h4>
-                    <p>
-                        시들어 힘차게 못하다 것이다.보라, 사랑의 있는가? 설레는 무엇이 없으면 동력은 사막이다. 가슴이 속에 커다란 투명하되 청춘의 것이다. 무한한 얼음에 되려니와, 사는가 청춘이 인간이 목숨을 대고, 작고 것이다. 이상이 있는 피부가 거친 살 듣는다.
-                    </p>
+                    <h4>장점</h4>
+                    <p>새로운 것에 대한 편견이 적어 뭐든지 잘 배운다, 무엇이든 열심히 한다.</p>
                 </li>
                 <li>
-                    <h4>우리팀만의 약속</h4>
-                    <p>
-                        시들어 힘차게 못하다 것이다.보라, 사랑의 있는가? 설레는 무엇이 없으면 동력은 사막이다. 가슴이 속에 커다란 투명하되 청춘의 것이다. 무한한 얼음에 되려니와, 사는가 청춘이 인간이 목숨을 대고, 작고 것이다. 이상이 있는 피부가 거친 살 듣는다.
-                    </p>
+                    <h4>협업스타일</h4>
+                    <p>어려워 하는 사람을 돕고 최대한 좋은 결과를 도출해낼 수 있도록 한다.</p>
                 </li>
             </ul>
         </section>
         <section class="wrap">
-            <h2>팀원등록</h2>
+            <h2>방명록</h2>
             <div>
                 <div class="row mb-3">
-                  <label for="inputName" class="col-sm-2 col-form-label">이름</label>
+                  <label for="inputName" class="col-sm-2 col-form-label" >이름</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputName" placeholder="본인의 이름를 작성해주세요!">
+                    <input type="text" class="form-control" id="inputName" placeholder="이름을 작성해주세요!">
                   </div>
                 </div>
                 <div class="row mb-3">
-                  <label for="inputMbti" class="col-sm-2 col-form-label">MBTI</label>
+                  <label for="inputComment" class="col-sm-2 col-form-label" >방명록</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputMbti" placeholder="본인의 MBTI를 작성해주세요!">
+                    <input type="text" class="form-control" id="inputComment" placeholder="댓글을 남겨주세요!">
                   </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="inputAdvantage" class="col-sm-2 col-form-label">장점</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputAdvantage" placeholder="본인의 장점을 작성해주세요!">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="inputStyle" class="col-sm-2 col-form-label">협업스타일</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputStyle" placeholder="본인의 협업스타일을 작성해주세요!">
-                    </div>
                 </div>
                 <div class="btn-container">
-                    <button onclick="save_profile()" type="submit" class="btn btn-primary">등록하기</button>
+                    <button onclick="save_comment()" type="submit" class="btn btn-primary">등록하기</button>
                 </div>
             </div>
         </section>
