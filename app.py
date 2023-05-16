@@ -9,6 +9,10 @@ db = client.dbsparta
 def home():
     return render_template('index.html')
 
+@app.route('/kang')
+def kang():
+    return render_template('kang.html')
+
 @app.route('/guestbook')
 def guestbook():
     return render_template('guestbook.html')
@@ -17,14 +21,14 @@ def guestbook():
 def member_post():
     name_receive = request.form['name_give']
     mbti_receive = request.form['mbti_give']
-    hobby_receive = request.form['hobby_give']
-    comment_receive = request.form['comment_give']
+    advantage_receive = request.form['advantage_give']
+    style_receive = request.form['style_give']
     
     doc = {
         'name' : name_receive,
         'mbti' : mbti_receive,
-        'hobby' : hobby_receive,
-        'comment' : comment_receive
+        'advantage' : advantage_receive,
+        'style' : style_receive
     }
     db.member.insert_one(doc)
     return jsonify({'msg':'등록 완료!'})
