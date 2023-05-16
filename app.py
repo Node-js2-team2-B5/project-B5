@@ -13,6 +13,22 @@ def home():
 def guestbook():
     return render_template('guestbook.html')
 
+
+@app.route("/guestbook", methods=["GET"])
+def guestbook_get():
+    all_comment = list(db.guestbook.find({},{'_id':False}))
+    return jsonify({'result': all_comment})
+
+@app.route("/members", methods=["GET"])
+def members_get():
+    all_members = list(db.member.find({},{'_id':False}))
+    return jsonify({'result': all_members})
+
+@app.route("/members/:id", methods=["GET"])
+def members_get():
+    all_membersid = list(db.memberid.find({},{'_id':request.args.get('id')[id:1]}))  #S.A에 request부분  id = request.args.get(’id’){id:1}
+    return jsonify({'result': all_membersid})
+
 @app.route("/members", methods=["POST"])
 def member_post():
     name_receive = request.form['name_give']
@@ -43,3 +59,11 @@ def guestbook_post():
 
 if __name__ == '__main__':
     app.run()
+
+
+
+
+
+
+
+
