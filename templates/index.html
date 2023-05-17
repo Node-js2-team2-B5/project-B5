@@ -65,7 +65,7 @@
           .then((res) => res.json())
           .then((data) => {
             alert(data["msg"]);
-            // window.location.reload();
+            window.location.reload();
           });
         }
 
@@ -74,8 +74,8 @@
           fetch("/members")
             .then((res) => res.json())
             .then((data) => {
+              
               let rows = data.result;
-              console.log(rows);
               $("#profiles").empty();
               $("#profiles").append(
                 rows.map(
@@ -85,16 +85,29 @@
                         <p><span>이름: ${row.name}</span><span>mbti: ${row.mbti}</span></p>
                         <p>장점: ${row.advantage}</p>
                         <p>협업스타일: ${row.style}</p>
+                        <button onclick="delete_profile(this)" data-name="${row.name}" type="submit" class="btn btn-primary">삭제하기</button>
                     </li>
                   `
                 )
               );
             });
+
+        }
+
+        function delete_profile(tag) {
+          let name = tag.getAttribute('data-name')
+          console.log(name)
+          fetch(`/members/${name}`, { method: "DELETE"})
+          .then((res) => res.json())
+          .then((data) => {
+            alert(data["msg"]);
+            window.location.reload();
+          });
         }
       </script>
 </head>
 <body>
-    <header class="header">
+    <header  class="header">
         <div class="wrap">
             <h1><a href="/">오쪼라구</a></h1>
             <ul class="links">

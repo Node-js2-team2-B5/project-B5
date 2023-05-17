@@ -35,8 +35,14 @@ def member_post():
 #메인페이지 하단 멤버카드 GET
 @app.route("/members", methods=["GET"])
 def members_get():
-    all_members = list(db.member.find({},{'_id':False}))
+    all_members = list(db.member.find({}, {'_id':False}))
     return jsonify({'result': all_members})
+
+#메인페이지 하단 멤버카드 DELETE
+@app.route("/members/<membername>", methods=["DELETE"])
+def members_delete(membername):
+    db.member.delete_one({'name':membername})
+    return jsonify({'msg': '삭제완료'})
 
 #서브페이지 상단 프로필 GET
 @app.route("/profile/<membername>", methods=["GET"])
